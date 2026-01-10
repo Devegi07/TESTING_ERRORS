@@ -1,0 +1,17 @@
+name: Delete File Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete-file:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Delete File
+        shell: pwsh  
+        run: |
+          $filePath = "C:\my-test\sample.xlsx"
+          Remove-Item $filePath
+          Write-Host "✅ File deleted successfully"
+
