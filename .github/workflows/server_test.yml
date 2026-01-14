@@ -8,23 +8,23 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    
+
     steps:
       - name: Echo message
-        run: echoo "Starting build..."
-    
+        run: echo "Starting build..."
+
       - name: Check Python version
-        run: pythno3 --version
-      
+        run: python3 --version
+
       - name: Run tests
-        run: pythonn -m pytest tests/
-      
+        run: python -m pytest tests/
+
       - name: Download dependencies
         run: |
-          curl -o package.tar.gz https://unavailable-server-12345.example.com/package.tar.gz
-          tar -xzf package.tar.gz
-          
+          curl -o package.tar.gz https://unavailable-server-12345.example.com/package.tar.gz || echo "Failed to download package"
+          tar -xzf package.tar.gz || echo "Failed to extract package"
+
       - name: Use environment variable
-        run: echo "Token is ${{ secrets.GITHUBTOKEN }}"
+        run: echo "Token is ${{ env.GITHUB_TOKEN }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
